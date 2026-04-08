@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de Recibo</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="layout">
+    <section class="panel panel-form">
+      <div class="panel-heading">
+        <p class="eyebrow">Documento simples</p>
+        <h1>Recibo de pagamento</h1>
+        <p class="intro">Preencha os dados e acompanhe a prévia do recibo em tempo real.</p>
+      </div>
+
+      <form id="receipt-form" class="form-grid">
+        <label>
+          Valor
+          <input type="number" name="valor" id="valor" min="0" step="0.01" placeholder="3250,00" required>
+        </label>
+
+        <label>
+          Pagador
+          <input type="text" name="pagador" id="pagador" placeholder="Nome de quem pagou" required>
+        </label>
+
+        <label>
+          CPF ou CNPJ do pagador
+          <input type="text" name="documentoPagador" id="documentoPagador" placeholder="Opcional" inputmode="numeric">
+        </label>
+
+        <fieldset class="radio-group">
+          <legend>Referente</legend>
+          <div class="radio-options">
+            <label><input type="radio" name="referentePrefixo" value="à"> à</label>
+            <label><input type="radio" name="referentePrefixo" value="a" checked> a</label>
+            <label><input type="radio" name="referentePrefixo" value="às"> às</label>
+            <label><input type="radio" name="referentePrefixo" value="ao"> ao</label>
+            <label><input type="radio" name="referentePrefixo" value="aos"> aos</label>
+          </div>
+        </fieldset>
+
+        <label class="field-span">
+          Descrição
+          <input type="text" name="referenteDescricao" id="referenteDescricao" placeholder="Ex.: aluguel do mês de março" required>
+        </label>
+
+        <label>
+          Nome do emissor
+          <input type="text" name="emissor" id="emissor" placeholder="Quem recebeu o pagamento" required>
+        </label>
+
+        <label>
+          CPF ou CNPJ do emissor
+          <input type="text" name="documentoEmissor" id="documentoEmissor" placeholder="Opcional" inputmode="numeric">
+        </label>
+
+        <label>
+          Telefone
+          <input type="tel" name="telefone" id="telefone" placeholder="Opcional" inputmode="tel">
+        </label>
+
+        <label>
+          Cidade
+          <input type="text" name="cidade" id="cidade" placeholder="Cidade do recibo" required>
+        </label>
+
+        <label>
+          Data do pagamento
+          <input type="date" name="dataPagamento" id="dataPagamento" required>
+        </label>
+
+        <label>
+          Forma do pagamento
+          <select name="formaPagamento" id="formaPagamento" required>
+            <option value="dinheiro">Dinheiro</option>
+            <option value="pix">Pix</option>
+            <option value="cheque">Cheque</option>
+            <option value="transferência">Transferência</option>
+            <option value="cartão">Cartão</option>
+            <option value="boleto">Boleto</option>
+          </select>
+        </label>
+
+        <label class="checkbox-field">
+          <input type="checkbox" name="duasVias" id="duasVias">
+          Imprimir duas vias
+        </label>
+
+        <div class="actions field-span">
+          <button type="button" id="print-button" class="button secondary">Imprimir recibo</button>
+          <button type="reset" class="button ghost">Limpar</button>
+        </div>
+        <p class="print-note field-span">
+          Para imprimir sem título da página, URL e data, desative a opção de cabeçalhos e rodapés na janela de impressão do navegador.
+        </p>
+      </form>
+    </section>
+
+    <section class="panel panel-preview">
+      <div class="paper" id="paper">
+        <div class="receipt" id="print-area">
+          <div class="receipt-header">
+            <div>
+              <h2>Recibo de Pagamento</h2>
+            </div>
+            <div class="receipt-value" data-role="valor-box">R$ 0,00</div>
+          </div>
+
+          <p class="receipt-body" data-role="texto">
+            Recebi de <strong>________________</strong> a importância de <strong>R$ 0,00</strong>,
+            referente <strong>a ____________________</strong>, por meio de <strong>dinheiro</strong>,
+            e para maior clareza firmo o presente recibo, dando plena, geral e irrevogável quitação
+            pelo valor recebido.
+          </p>
+
+          <div class="receipt-footer">
+            <p data-role="local-data">Cidade, 07 de abril de 2026</p>
+
+            <div class="signature-block">
+              <div class="signature-line"></div>
+              <p class="signature-name" data-role="emissor">Nome do emissor</p>
+              <p class="signature-doc" data-role="documento">CPF/CNPJ</p>
+              <p class="signature-phone" data-role="telefone"></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="receipt print-copy" aria-hidden="true">
+          <div class="receipt-header">
+            <div>
+              <h2>Recibo de Pagamento</h2>
+            </div>
+            <div class="receipt-value" data-role="valor-box">R$ 0,00</div>
+          </div>
+
+          <p class="receipt-body" data-role="texto">
+            Recebi de <strong>________________</strong> a importância de <strong>R$ 0,00</strong>,
+            referente <strong>a ____________________</strong>, por meio de <strong>dinheiro</strong>,
+            e para maior clareza firmo o presente recibo, dando plena, geral e irrevogável quitação
+            pelo valor recebido.
+          </p>
+
+          <div class="receipt-footer">
+            <p data-role="local-data">Cidade, 07 de abril de 2026</p>
+
+            <div class="signature-block">
+              <div class="signature-line"></div>
+              <p class="signature-name" data-role="emissor">Nome do emissor</p>
+              <p class="signature-doc" data-role="documento">CPF/CNPJ</p>
+              <p class="signature-phone" data-role="telefone"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
